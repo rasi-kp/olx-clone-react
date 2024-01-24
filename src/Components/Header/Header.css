@@ -2,12 +2,13 @@
   padding: 10px;
   background-color: whitesmoke;
   position: fixed;
-  width: 100vw;
+  width: 100%;
   z-index: 999;
 }
 
 .headerChildDiv {
   width: 100%;
+  padding: 3px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -105,7 +106,12 @@
   font-weight: bolder;
   margin-right: 5px;
 }
-
+.loginPage{
+  cursor: pointer;
+}
+.loginPage:hover{
+  background-color: wheat;
+}
 .loginPage hr {
   margin: 0;
   background-color: black;

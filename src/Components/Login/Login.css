@@ -7,13 +7,23 @@
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 6px;
+    width: 350px;
   }
   
   .loginParentDiv .input {
+    width: 100%;
     border-top-color: transparent;
     border-left-color: transparent;
     border-right-color: transparent;
     outline-color: transparent;
+
+  }
+  .loginParentDiv img{
+    margin-left: 15%; 
+  }
+  .loginParentDiv label{
+    margin-left: 1%;
+ 
   }
   
   .loginParentDiv button {

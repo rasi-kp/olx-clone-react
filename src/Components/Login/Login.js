@@ -1,43 +1,43 @@
-import React from 'react';
 import React, { useState, useContext } from 'react';
 
 import Logo from '../../olx-logo.png';
 import './Login.css';
 import { FirebaseContext } from '../../store/firebasecontext';
 import {auth,firestore}  from '../../firebase/config';
-import {sign  } from 'firebase/auth';
+import {signInWithEmailAndPassword} from 'firebase/auth';
 import { useNavigate } from 'react-router-dom'
 import {collection,addDoc} from "firebase/firestore"
 
 function Login() {
-
+  const navigate = useNavigate();
   const [email,setEmail]=useState('')
   const [password,setPassword]=useState('')
   const handleSubmit=async (e)=>{
     e.preventDefault()
-    const result = await createUserWithEmailAndPassword(auth, email, password);
+    try{
+      const result = await signInWithEmailAndPassword(auth, email, password);
+      console.log(result);
+    alert("Successfully login")
     const user = result.user;
-
-    const ref=await addDoc(collection(firestore,"users"),{
-      id: user.uid,  
-      username: username,
-      phone: phone, 
-    });
-    navigate('/login');
+    navigate('/');
+    }catch(error){
+      alert(error.message)
+    }
+    
   }
   return (
     <div>
       <div className="loginParentDiv">
-        <img width="200px" height="200px" src={Logo}></img>
-        <form>
+        <img  width="200px" height="200px" src={Logo}></img>
+        <form onSubmit={handleSubmit}>
           <label htmlFor="fname">Email</label>
           <br />
-          <input
+          <input 
             className="input"
+            value={email}
+            onChange={(e)=>setEmail(e.target.value)}
             type="email"
             id="fname"
-            value={email}
-            onClick={(e)=>setEmail(e.target.value)}
             name="email"
             defaultValue="John"
           />
@@ -46,12 +46,11 @@ function Login() {
           <br />
           <input
             className="input"
-            type="password"
             value={password}
-            onClick={(e)=>setPassword(e.target.value)}
-            id="lname"
+            onChange={(e)=>setPassword(e.target.value)}
+            type="password"
+            id="password"
             name="password"
-            defaultValue="Doe"
           />
           <br />
           <br />

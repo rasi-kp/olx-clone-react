@@ -1,8 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useState} from 'react';
 
 import Logo from '../../olx-logo.png';
 import './Signup.css';
-import { FirebaseContext } from '../../store/firebasecontext';
 import {auth,firestore}  from '../../firebase/config';
 import {createUserWithEmailAndPassword} from 'firebase/auth';
 import { useNavigate } from 'react-router-dom'
@@ -14,7 +13,6 @@ export default function Signup() {
   const [email,setEmail]=useState('')
   const [phone,setPhone]=useState('')
   const [password,setPassword]=useState('')
-  const {firebase} = useContext(FirebaseContext);
 
   const handleSubmit=async (e)=>{
     e.preventDefault()
@@ -84,7 +82,7 @@ export default function Signup() {
           <br />
           <button>Signup</button>
         </form>
-        <a>Login</a>
+        <a onClick={()=>navigate('/login')}>Login</a>
       </div>
     </div>
   );

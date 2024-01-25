@@ -2,11 +2,9 @@ import React, { useState, useContext } from 'react';
 
 import Logo from '../../olx-logo.png';
 import './Login.css';
-import { FirebaseContext } from '../../store/firebasecontext';
-import {auth,firestore}  from '../../firebase/config';
+import {auth}  from '../../firebase/config';
 import {signInWithEmailAndPassword} from 'firebase/auth';
 import { useNavigate } from 'react-router-dom'
-import {collection,addDoc} from "firebase/firestore"
 
 function Login() {
   const navigate = useNavigate();
@@ -56,7 +54,7 @@ function Login() {
           <br />
           <button>Login</button>
         </form>
-        <a>Signup</a>
+        <a onClick={()=>navigate('/signup')}>Signup</a>
       </div>
     </div>
   );

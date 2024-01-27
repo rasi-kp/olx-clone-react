@@ -5,11 +5,15 @@ import { collection, getDocs } from '@firebase/firestore';
 import Heart from '../../assets/Heart';
 import './Post.css';
 import { FirebaseContext } from '../../store/firebasecontext';
+import { PostContext } from '../../store/ViewContext';
+import { useNavigate } from 'react-router-dom'
 
 function Posts() {
+  const navigate = useNavigate();
   const { firebase } = useContext(FirebaseContext)
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(false);
+  const {setPostDetails} =useContext(PostContext)
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -21,7 +25,6 @@ function Posts() {
           productsData.push({ id: doc.id, ...doc.data() });
         });
         setProducts(productsData);
-        console.log(productsData);
       } catch (error) {
         console.error('Error fetching products: ', error);
       }
@@ -42,7 +45,12 @@ function Posts() {
           {
             products.map(product => {
 
-              return <div className="card">
+              return <div className="card"
+              onClick={()=>{
+                setPostDetails(product)
+                navigate('/view')
+              }}>
+                
                 <div className="favorite">
                   <Heart></Heart>
                 </div>
